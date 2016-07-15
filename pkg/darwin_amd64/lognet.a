@@ -1,0 +1,277 @@
+!<arch>
+__.PKGDEF       0           0     0     644     25174     `
+go object darwin amd64 go1.6.2 X:none
+build id "17125837b81210ce2fce1615e237da337d574f52"
+
+$$
+package lognet
+	import fmt "fmt"
+	import os "os"
+	import net "net"
+	import ini "github.com/c4pt0r/ini"
+	type @"net".fdMutex struct { @"net".state uint64; @"net".rsema uint32; @"net".wsema uint32 }
+	func (@"net".muÂ·2 *@"net".fdMutex) Decref () (? bool)
+	func (@"net".muÂ·2 *@"net".fdMutex) Incref () (? bool)
+	func (@"net".muÂ·2 *@"net".fdMutex) IncrefAndClose () (? bool)
+	func (@"net".muÂ·2 *@"net".fdMutex) RWLock (@"net".readÂ·3 bool) (? bool)
+	func (@"net".muÂ·2 *@"net".fdMutex) RWUnlock (@"net".readÂ·3 bool) (? bool)
+	type @"net".Addr interface { Network() (? string); String() (? string) }
+	type @"net".pollDesc struct { @"net".runtimeCtx uintptr }
+	func (@"net".pdÂ·1 *@"net".pollDesc "esc:0x1") Close ()
+	func (@"net".pdÂ·1 *@"net".pollDesc "esc:0x1") Evict ()
+	func (@"net".pdÂ·2 *@"net".pollDesc "esc:0x1") Init (@"net".fdÂ·3 *@"net".netFD "esc:0x1") (? error)
+	func (@"net".pdÂ·2 *@"net".pollDesc "esc:0x1") Prepare (@"net".modeÂ·3 int) (? error)
+	func (@"net".pdÂ·2 *@"net".pollDesc "esc:0x1") PrepareRead () (? error)
+	func (@"net".pdÂ·2 *@"net".pollDesc "esc:0x1") PrepareWrite () (? error)
+	func (@"net".pdÂ·2 *@"net".pollDesc "esc:0x1") Wait (@"net".modeÂ·3 int) (? error)
+	func (@"net".pdÂ·1 *@"net".pollDesc "esc:0x1") WaitCanceled (@"net".modeÂ·2 int)
+	func (@"net".pdÂ·1 *@"net".pollDesc "esc:0x1") WaitCanceledRead ()
+	func (@"net".pdÂ·1 *@"net".pollDesc "esc:0x1") WaitCanceledWrite ()
+	func (@"net".pdÂ·2 *@"net".pollDesc "esc:0x1") WaitRead () (? error)
+	func (@"net".pdÂ·2 *@"net".pollDesc "esc:0x1") WaitWrite () (? error)
+	import syscall "syscall" // indirect
+	type @"syscall"._Socklen uint32
+	type @"syscall".Sockaddr interface { @"syscall".sockaddr() (@"syscall".ptr @"unsafe".Pointer, @"syscall".len @"syscall"._Socklen, @"syscall".err error) }
+	import time "time" // indirect
+	type @"time".zone struct { @"time".name string; @"time".offset int; @"time".isDST bool }
+	type @"time".zoneTrans struct { @"time".when int64; @"time".index uint8; @"time".isstd bool; @"time".isutc bool }
+	type @"time".Location struct { @"time".name string; @"time".zone []@"time".zone; @"time".tx []@"time".zoneTrans; @"time".cacheStart int64; @"time".cacheEnd int64; @"time".cacheZone *@"time".zone }
+	func (@"time".lÂ·2 *@"time".Location "esc:0x22") String () (? string)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".firstZoneUsed () (? bool)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x12") @"time".get () (? *@"time".Location)
+	func (@"time".lÂ·6 *@"time".Location "esc:0x32") @"time".lookup (@"time".secÂ·7 int64) (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".isDSTÂ·3 bool, @"time".startÂ·4 int64, @"time".endÂ·5 int64)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".lookupFirstZone () (? int)
+	func (@"time".lÂ·4 *@"time".Location "esc:0x1") @"time".lookupName (@"time".nameÂ·5 string "esc:0x1", @"time".unixÂ·6 int64) (@"time".offsetÂ·1 int, @"time".isDSTÂ·2 bool, @"time".okÂ·3 bool)
+	type @"time".Duration int64
+	func (@"time".dÂ·2 @"time".Duration) Hours () (? float64) { var @"time".hourÂ·3 @"time".Duration; ; @"time".hourÂ·3 = @"time".dÂ·2 / @"time".Duration(0x34630b8a000); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x34630b8a000); return float64(@"time".hourÂ·3) + float64(@"time".nsecÂ·4) * float64(8190022623310637111963488201822504381538623676021880892417778544696899264837610290203272971060556344039023584360473938041055625214280336402169897364226048p-553) }
+	func (@"time".dÂ·2 @"time".Duration) Minutes () (? float64) { var @"time".minÂ·3 @"time".Duration; ; @"time".minÂ·3 = @"time".dÂ·2 / @"time".Duration(0xdf8475800); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0xdf8475800); return float64(@"time".minÂ·3) + float64(@"time".nsecÂ·4) * float64(7678146209353722106395056769533233877065564876941352542109479049699919628723768656821910653339403201031675627614471533358284117434246264392176261853609984p-547) }
+	func (@"time".dÂ·2 @"time".Duration) Nanoseconds () (? int64) { return int64(@"time".dÂ·2) }
+	func (@"time".dÂ·2 @"time".Duration) Seconds () (? float64) { var @"time".secÂ·3 @"time".Duration; ; @"time".secÂ·3 = @"time".dÂ·2 / @"time".Duration(0x3b9aca00); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x3b9aca00); return float64(@"time".secÂ·3) + float64(@"time".nsecÂ·4) * float64(7198262071269114660816079141112770740375861891461678802759824945047098083990024106014198994535558872472104883612039846078596891298747423852523262413111296p-541) }
+	func (@"time".dÂ·2 @"time".Duration) String () (? string)
+	type @"time".Month int
+	func (@"time".mÂ·2 @"time".Month) String () (? string) { return @"time".months[@"time".mÂ·2 - @"time".Month(0x1)] }
+	type @"time".Weekday int
+	func (@"time".dÂ·2 @"time".Weekday) String () (? string) { return @"time".days[@"time".dÂ·2] }
+	type @"time".Time struct { @"time".sec int64; @"time".nsec int32; @"time".loc *@"time".Location }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Add (@"time".dÂ·3 @"time".Duration) (? @"time".Time) { @"time".tÂ·2.@"time".sec += int64(@"time".dÂ·3 / @"time".Duration(0x3b9aca00)); var @"time".nsecÂ·4 int32; ; @"time".nsecÂ·4 = int32(@"time".tÂ·2.@"time".nsec) + int32(@"time".dÂ·3 % @"time".Duration(0x3b9aca00)); if @"time".nsecÂ·4 >= int32(0x3b9aca00) { @"time".tÂ·2.@"time".sec++; @"time".nsecÂ·4 -= int32(0x3b9aca00) } else { if @"time".nsecÂ·4 < int32(0x0) { @"time".tÂ·2.@"time".sec--; @"time".nsecÂ·4 += int32(0x3b9aca00) } }; @"time".tÂ·2.@"time".nsec = @"time".nsecÂ·4; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") AddDate (@"time".yearsÂ·3 int, @"time".monthsÂ·4 int, @"time".daysÂ·5 int) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") After (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec > @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec > @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") AppendFormat (@"time".bÂ·3 []byte "esc:0x1a", @"time".layoutÂ·4 string "esc:0x9") (? []byte)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Before (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec < @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec < @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Clock () (@"time".hourÂ·1 int, @"time".minÂ·2 int, @"time".secÂ·3 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Date () (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Day () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Equal (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec == @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") Format (@"time".layoutÂ·3 string "esc:0x9") (? string)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") GobDecode (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") GobEncode () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Hour () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") ISOWeek () (@"time".yearÂ·1 int, @"time".weekÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") In (@"time".locÂ·3 *@"time".Location "esc:0x12") (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") IsZero () (? bool) { return @"time".tÂ·2.@"time".sec == int64(0x0) && @"time".tÂ·2.@"time".nsec == int32(0x0) }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Local () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".Local; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Location () (? *@"time".Location) { var @"time".lÂ·3 *@"time".Location; ; @"time".lÂ·3 = @"time".tÂ·2.@"time".loc; if @"time".lÂ·3 == nil { @"time".lÂ·3 = @"time".UTC }; return @"time".lÂ·3 }
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") MarshalBinary () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalJSON () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalText () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Minute () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Month () (? @"time".Month)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Nanosecond () (? int) { return int(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Round (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Second () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") String () (? string)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Sub (@"time".uÂ·3 @"time".Time "esc:0x1") (? @"time".Duration)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Truncate (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") UTC () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".UTC; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Unix () (? int64) { return @"time".tÂ·2.@"time".sec + int64(-0xe7791f700) }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") UnixNano () (? int64) { return (@"time".tÂ·2.@"time".sec + int64(-0xe7791f700)) * int64(0x3b9aca00) + int64(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalBinary (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalJSON (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalText (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Weekday () (? @"time".Weekday)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Year () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") YearDay () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x32") Zone () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") @"time".abs () (? uint64)
+	func (@"time".tÂ·5 @"time".Time "esc:0x1") @"time".date (@"time".fullÂ·6 bool) (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int, @"time".ydayÂ·4 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x32") @"time".locabs () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".absÂ·3 uint64)
+	type @"net".sockaddr interface { Network() (? string); String() (? string); @"net".family() (? int); @"net".isWildcard() (? bool); @"net".sockaddr(@"net".family int) (? @"syscall".Sockaddr, ? error) }
+	type @"os".dirInfo struct { @"os".buf []byte; @"os".nbuf int; @"os".bufp int }
+	type @"os".file struct { @"os".fd int; @"os".name string; @"os".dirinfo *@"os".dirInfo }
+	func (@"os".fileÂ·2 *@"os".file) @"os".close () (? error)
+	type @"os".FileMode uint32
+	func (@"os".mÂ·2 @"os".FileMode) IsDir () (? bool) { return @"os".mÂ·2 & @"os".FileMode(0x80000000) != @"os".FileMode(0x0) }
+	func (@"os".mÂ·2 @"os".FileMode) IsRegular () (? bool) { return @"os".mÂ·2 & @"os".FileMode(0x8f000000) == @"os".FileMode(0x0) }
+	func (@"os".mÂ·2 @"os".FileMode) Perm () (? @"os".FileMode) { return @"os".mÂ·2 & @"os".FileMode(0x1ff) }
+	func (@"os".mÂ·2 @"os".FileMode) String () (? string)
+	type @"os".FileInfo interface { IsDir() (? bool); ModTime() (? @"time".Time); Mode() (? @"os".FileMode); Name() (? string); Size() (? int64); Sys() (? interface {}) }
+	type @"os".File struct { @"os".? *@"os".file }
+	func (@"os".fÂ·2 *@"os".File "esc:0x22") Chdir () (? error)
+	func (@"os".fÂ·2 *@"os".File "esc:0x22") Chmod (@"os".modeÂ·3 @"os".FileMode) (? error)
+	func (@"os".fÂ·2 *@"os".File "esc:0x22") Chown (@"os".uidÂ·3 int, @"os".gidÂ·4 int) (? error)
+	func (@"os".fÂ·2 *@"os".File "esc:0x9") Close () (? error)
+	func (@"os".fÂ·2 *@"os".File "esc:0x1") Fd () (? uintptr) { if @"os".fÂ·2 == nil { return uintptr(0xffffffffffffffff) }; return uintptr(@"os".fÂ·2.@"os".file.@"os".fd) }
+	func (@"os".fÂ·2 *@"os".File "esc:0x32") Name () (? string) { return @"os".fÂ·2.@"os".file.@"os".name }
+	func (@"os".fÂ·3 *@"os".File "esc:0x102") Read (@"os".bÂ·4 []byte "esc:0x1") (@"os".nÂ·1 int, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x102") ReadAt (@"os".bÂ·4 []byte "esc:0x1", @"os".offÂ·5 int64) (@"os".nÂ·1 int, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x1") Readdir (@"os".nÂ·4 int) (@"os".fiÂ·1 []@"os".FileInfo, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x1") Readdirnames (@"os".nÂ·4 int) (@"os".namesÂ·1 []string, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x102") Seek (@"os".offsetÂ·4 int64, @"os".whenceÂ·5 int) (@"os".retÂ·1 int64, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x10a") Stat () (? @"os".FileInfo, ? error)
+	func (@"os".fÂ·2 *@"os".File "esc:0x1") Sync () (? error)
+	func (@"os".fÂ·2 *@"os".File "esc:0x22") Truncate (@"os".sizeÂ·3 int64) (? error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x102") Write (@"os".bÂ·4 []byte "esc:0x1") (@"os".nÂ·1 int, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x102") WriteAt (@"os".bÂ·4 []byte "esc:0x1", @"os".offÂ·5 int64) (@"os".nÂ·1 int, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x102") WriteString (@"os".sÂ·4 string "esc:0x1") (@"os".nÂ·1 int, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".pread (@"os".bÂ·4 []byte "esc:0x1", @"os".offÂ·5 int64) (@"os".nÂ·1 int, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".pwrite (@"os".bÂ·4 []byte "esc:0x1", @"os".offÂ·5 int64) (@"os".nÂ·1 int, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".read (@"os".bÂ·4 []byte "esc:0x1") (@"os".nÂ·1 int, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".readdir (@"os".nÂ·4 int) (@"os".fiÂ·1 []@"os".FileInfo, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".readdirnames (@"os".nÂ·4 int) (@"os".namesÂ·1 []string, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".seek (@"os".offsetÂ·4 int64, @"os".whenceÂ·5 int) (@"os".retÂ·1 int64, @"os".errÂ·2 error)
+	func (@"os".fÂ·3 *@"os".File "esc:0x1") @"os".write (@"os".bÂ·4 []byte "esc:0x1") (@"os".nÂ·1 int, @"os".errÂ·2 error)
+	type @"net".netFD struct { @"net".fdmu @"net".fdMutex; @"net".sysfd int; @"net".family int; @"net".sotype int; @"net".isConnected bool; @"net".net string; @"net".laddr @"net".Addr; @"net".raddr @"net".Addr; @"net".pd @"net".pollDesc }
+	func (@"net".fdÂ·2 *@"net".netFD) Close () (? error)
+	func (@"net".fdÂ·3 *@"net".netFD) Read (@"net".pÂ·4 []byte "esc:0x1") (@"net".nÂ·1 int, @"net".errÂ·2 error)
+	func (@"net".fdÂ·3 *@"net".netFD) Write (@"net".pÂ·4 []byte "esc:0x1") (@"net".nnÂ·1 int, @"net".errÂ·2 error)
+	func (@"net".fdÂ·3 *@"net".netFD) @"net".accept () (@"net".netfdÂ·1 *@"net".netFD, @"net".errÂ·2 error)
+	func (@"net".fdÂ·2 *@"net".netFD "esc:0x1") @"net".addrFunc () (? func(? @"syscall".Sockaddr) (? @"net".Addr))
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".closeRead () (? error)
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".closeWrite () (? error)
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".connect (@"net".laÂ·3 @"syscall".Sockaddr "esc:0x1", @"net".raÂ·4 @"syscall".Sockaddr, @"net".deadlineÂ·5 @"time".Time "esc:0x1", @"net".cancelÂ·6 <-chan struct {}) (? error)
+	func (@"net".fdÂ·1 *@"net".netFD) @"net".decref ()
+	func (@"net".fdÂ·1 *@"net".netFD) @"net".destroy ()
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".dial (@"net".laddrÂ·3 @"net".sockaddr, @"net".raddrÂ·4 @"net".sockaddr, @"net".deadlineÂ·5 @"time".Time "esc:0x1", @"net".cancelÂ·6 <-chan struct {}) (? error)
+	func (@"net".fdÂ·3 *@"net".netFD "esc:0x9") @"net".dup () (@"net".fÂ·1 *@"os".File, @"net".errÂ·2 error)
+	func (@"net".fdÂ·2 *@"net".netFD "esc:0x1") @"net".eofError (@"net".nÂ·3 int, @"net".errÂ·4 error "esc:0x12") (? error) { if @"net".nÂ·3 == int(0x0) && @"net".errÂ·4 == nil && @"net".fdÂ·2.@"net".sotype != int(0x2) && @"net".fdÂ·2.@"net".sotype != int(0x3) { return @"io".EOF }; return @"net".errÂ·4 }
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".incref () (? error)
+	func (@"net".fdÂ·2 *@"net".netFD "esc:0x1") @"net".init () (? error)
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".listenDatagram (@"net".laddrÂ·3 @"net".sockaddr) (? error)
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".listenStream (@"net".laddrÂ·3 @"net".sockaddr, @"net".backlogÂ·4 int) (? error)
+	func (@"net".fdÂ·2 *@"net".netFD "esc:0x9") @"net".name () (? string)
+	func (@"net".fdÂ·4 *@"net".netFD) @"net".readFrom (@"net".pÂ·5 []byte "esc:0x1") (@"net".nÂ·1 int, @"net".saÂ·2 @"syscall".Sockaddr, @"net".errÂ·3 error)
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".readLock () (? error)
+	func (@"net".fdÂ·6 *@"net".netFD) @"net".readMsg (@"net".pÂ·7 []byte "esc:0x1", @"net".oobÂ·8 []byte "esc:0x1") (@"net".nÂ·1 int, @"net".oobnÂ·2 int, @"net".flagsÂ·3 int, @"net".saÂ·4 @"syscall".Sockaddr, @"net".errÂ·5 error)
+	func (@"net".fdÂ·1 *@"net".netFD) @"net".readUnlock ()
+	func (@"net".fdÂ·1 *@"net".netFD) @"net".setAddr (@"net".laddrÂ·2 @"net".Addr, @"net".raddrÂ·3 @"net".Addr)
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".setDeadline (@"net".tÂ·3 @"time".Time "esc:0x1") (? error)
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".setReadDeadline (@"net".tÂ·3 @"time".Time "esc:0x1") (? error)
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".setWriteDeadline (@"net".tÂ·3 @"time".Time "esc:0x1") (? error)
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".shutdown (@"net".howÂ·3 int) (? error)
+	func (@"net".fdÂ·2 *@"net".netFD) @"net".writeLock () (? error)
+	func (@"net".fdÂ·4 *@"net".netFD) @"net".writeMsg (@"net".pÂ·5 []byte "esc:0x1", @"net".oobÂ·6 []byte "esc:0x1", @"net".saÂ·7 @"syscall".Sockaddr) (@"net".nÂ·1 int, @"net".oobnÂ·2 int, @"net".errÂ·3 error)
+	func (@"net".fdÂ·3 *@"net".netFD) @"net".writeTo (@"net".pÂ·4 []byte "esc:0x1", @"net".saÂ·5 @"syscall".Sockaddr) (@"net".nÂ·1 int, @"net".errÂ·2 error)
+	func (@"net".fdÂ·1 *@"net".netFD) @"net".writeUnlock ()
+	type @"net".conn struct { @"net".fd *@"net".netFD }
+	func (@"net".cÂ·2 *@"net".conn) Close () (? error)
+	func (@"net".cÂ·3 *@"net".conn) File () (@"net".fÂ·1 *@"os".File, @"net".errÂ·2 error)
+	func (@"net".cÂ·2 *@"net".conn "esc:0x32") LocalAddr () (? @"net".Addr) { if !@"net".cÂ·2.@"net".ok() { return nil }; return @"net".cÂ·2.@"net".fd.@"net".laddr }
+	func (@"net".cÂ·3 *@"net".conn) Read (@"net".bÂ·4 []byte "esc:0x1") (? int, ? error)
+	func (@"net".cÂ·2 *@"net".conn "esc:0x32") RemoteAddr () (? @"net".Addr) { if !@"net".cÂ·2.@"net".ok() { return nil }; return @"net".cÂ·2.@"net".fd.@"net".raddr }
+	func (@"net".cÂ·2 *@"net".conn "esc:0x2a") SetDeadline (@"net".tÂ·3 @"time".Time "esc:0x1") (? error)
+	func (@"net".cÂ·2 *@"net".conn "esc:0x2a") SetReadBuffer (@"net".bytesÂ·3 int) (? error)
+	func (@"net".cÂ·2 *@"net".conn "esc:0x2a") SetReadDeadline (@"net".tÂ·3 @"time".Time "esc:0x1") (? error)
+	func (@"net".cÂ·2 *@"net".conn "esc:0x2a") SetWriteBuffer (@"net".bytesÂ·3 int) (? error)
+	func (@"net".cÂ·2 *@"net".conn "esc:0x2a") SetWriteDeadline (@"net".tÂ·3 @"time".Time "esc:0x1") (? error)
+	func (@"net".cÂ·3 *@"net".conn) Write (@"net".bÂ·4 []byte "esc:0x1") (? int, ? error)
+	func (@"net".cÂ·2 *@"net".conn "esc:0x1") @"net".ok () (? bool) { return @"net".cÂ·2 != nil && @"net".cÂ·2.@"net".fd != nil }
+	type @"net".IPMask []byte
+	func (@"net".mÂ·3 @"net".IPMask "esc:0x1") Size () (@"net".onesÂ·1 int, @"net".bitsÂ·2 int)
+	func (@"net".mÂ·2 @"net".IPMask "esc:0x1") String () (? string)
+	type @"net".IP []byte
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") DefaultMask () (? @"net".IPMask)
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") Equal (@"net".xÂ·3 @"net".IP "esc:0x1") (? bool)
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") IsGlobalUnicast () (? bool)
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") IsInterfaceLocalMulticast () (? bool) { return len(@"net".ipÂ·2) == int(0x10) && @"net".ipÂ·2[int(0x0)] == byte(0xff) && @"net".ipÂ·2[int(0x1)] & byte(0xf) == byte(0x1) }
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") IsLinkLocalMulticast () (? bool)
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") IsLinkLocalUnicast () (? bool)
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") IsLoopback () (? bool)
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") IsMulticast () (? bool)
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") IsUnspecified () (? bool)
+	func (@"net".ipÂ·3 @"net".IP "esc:0x1") MarshalText () (? []byte, ? error)
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") Mask (@"net".maskÂ·3 @"net".IPMask "esc:0x1") (? @"net".IP)
+	func (@"net".ipÂ·2 @"net".IP "esc:0x1") String () (? string)
+	func (@"net".ipÂ·2 @"net".IP "esc:0x12") To16 () (? @"net".IP) { if len(@"net".ipÂ·2) == int(0x4) { return @"net".IPv4(@"net".ipÂ·2[int(0x0)], @"net".ipÂ·2[int(0x1)], @"net".ipÂ·2[int(0x2)], @"net".ipÂ·2[int(0x3)]) }; if len(@"net".ipÂ·2) == int(0x10) { return @"net".ipÂ·2 }; return nil }
+	func (@"net".ipÂ·2 @"net".IP "esc:0x12") To4 () (? @"net".IP)
+	func (@"net".ipÂ·2 *@"net".IP "esc:0x1") UnmarshalText (@"net".textÂ·3 []byte "esc:0x1") (? error)
+	type @"net".UDPAddr struct { IP @"net".IP; Port int; Zone string }
+	func (@"net".aÂ·2 *@"net".UDPAddr "esc:0x1") Network () (? string) { return string("udp") }
+	func (@"net".aÂ·2 *@"net".UDPAddr "esc:0x1") String () (? string)
+	func (@"net".aÂ·2 *@"net".UDPAddr "esc:0x1") @"net".family () (? int)
+	func (@"net".aÂ·2 *@"net".UDPAddr "esc:0x1") @"net".isWildcard () (? bool)
+	func (@"net".aÂ·2 *@"net".UDPAddr "esc:0x12") @"net".opAddr () (? @"net".Addr) { if @"net".aÂ·2 == nil { return nil }; return @"net".aÂ·2 }
+	func (@"net".aÂ·3 *@"net".UDPAddr "esc:0x1") @"net".sockaddr (@"net".familyÂ·4 int) (? @"syscall".Sockaddr, ? error)
+	type @"net".dnsMsgHdr struct { @"net".id uint16; @"net".response bool; @"net".opcode int; @"net".authoritative bool; @"net".truncated bool; @"net".recursion_desired bool; @"net".recursion_available bool; @"net".rcode int }
+	func (@"net".hÂ·2 *@"net".dnsMsgHdr) Walk (@"net".fÂ·3 func(@"net".v interface {}, @"net".name string, @"net".tag string) (? bool) "esc:0x1") (? bool)
+	type @"net".dnsQuestion struct { Name string "net:\"domain-name\""; Qtype uint16; Qclass uint16 }
+	func (@"net".qÂ·2 *@"net".dnsQuestion) Walk (@"net".fÂ·3 func(@"net".v interface {}, @"net".name string, @"net".tag string) (? bool) "esc:0x1") (? bool)
+	type @"net".dnsRR_Header struct { Name string "net:\"domain-name\""; Rrtype uint16; Class uint16; Ttl uint32; Rdlength uint16 }
+	func (@"net".hÂ·2 *@"net".dnsRR_Header "esc:0x12") Header () (? *@"net".dnsRR_Header) { return @"net".hÂ·2 }
+	func (@"net".hÂ·2 *@"net".dnsRR_Header) Walk (@"net".fÂ·3 func(@"net".v interface {}, @"net".name string, @"net".tag string) (? bool) "esc:0x1") (? bool)
+	type @"net".dnsRR interface { Header() (? *@"net".dnsRR_Header); Walk(@"net".f func(@"net".v interface {}, @"net".name string, @"net".tag string) (@"net".ok bool)) (@"net".ok bool) }
+	type @"net".dnsMsg struct { @"net".? @"net".dnsMsgHdr; @"net".question []@"net".dnsQuestion; @"net".answer []@"net".dnsRR; @"net".ns []@"net".dnsRR; @"net".extra []@"net".dnsRR }
+	func (@"net".dnsÂ·3 *@"net".dnsMsg "esc:0x9") Pack () (@"net".msgÂ·1 []byte, @"net".okÂ·2 bool)
+	func (@"net".dnsÂ·2 *@"net".dnsMsg) String () (? string)
+	func (@"net".dnsÂ·2 *@"net".dnsMsg "esc:0x9") Unpack (@"net".msgÂ·3 []byte) (? bool)
+	type @"net".UDPConn struct { @"net".? @"net".conn }
+	func (@"net".cÂ·4 *@"net".UDPConn) ReadFrom (@"net".bÂ·5 []byte "esc:0x1") (? int, ? @"net".Addr, ? error)
+	func (@"net".cÂ·4 *@"net".UDPConn) ReadFromUDP (@"net".bÂ·5 []byte "esc:0x1") (? int, ? *@"net".UDPAddr, ? error)
+	func (@"net".cÂ·6 *@"net".UDPConn) ReadMsgUDP (@"net".bÂ·7 []byte "esc:0x1", @"net".oobÂ·8 []byte "esc:0x1") (@"net".nÂ·1 int, @"net".oobnÂ·2 int, @"net".flagsÂ·3 int, @"net".addrÂ·4 *@"net".UDPAddr, @"net".errÂ·5 error)
+	func (@"net".cÂ·4 *@"net".UDPConn) WriteMsgUDP (@"net".bÂ·5 []byte "esc:0x1", @"net".oobÂ·6 []byte "esc:0x1", @"net".addrÂ·7 *@"net".UDPAddr) (@"net".nÂ·1 int, @"net".oobnÂ·2 int, @"net".errÂ·3 error)
+	func (@"net".cÂ·3 *@"net".UDPConn) WriteTo (@"net".bÂ·4 []byte "esc:0x1", @"net".addrÂ·5 @"net".Addr) (? int, ? error)
+	func (@"net".cÂ·3 *@"net".UDPConn) WriteToUDP (@"net".bÂ·4 []byte "esc:0x1", @"net".addrÂ·5 *@"net".UDPAddr) (? int, ? error)
+	func (@"net".cÂ·3 *@"net".UDPConn) @"net".readDNSResponse () (? *@"net".dnsMsg, ? error)
+	func (@"net".cÂ·2 *@"net".UDPConn) @"net".writeDNSQuery (@"net".msgÂ·3 *@"net".dnsMsg "esc:0x9") (? error)
+	type @"".NetModel struct { UdpConn *@"net".UDPConn }
+	func (@"".thisÂ·1 *@"".NetModel "esc:0x1") Run ()
+	func (@"".thisÂ·1 *@"".NetModel "esc:0x1") @"".checkErr (@"".errÂ·2 error)
+	func @"".init ()
+	var @"time".months [12]string
+	var @"time".days [7]string
+	var @"time".Local *@"time".Location
+	var @"time".UTC *@"time".Location
+	import io "io" // indirect
+	var @"io".EOF error
+	func @"net".IPv4 (@"net".aÂ·2 byte, @"net".bÂ·3 byte, @"net".cÂ·4 byte, @"net".dÂ·5 byte) (? @"net".IP) { var @"net".pÂ·6 @"net".IP; ; @"net".pÂ·6 = make(@"net".IP, 0x10); copy(@"net".pÂ·6, @"net".v4InV6Prefix); @"net".pÂ·6[int(0xc)] = @"net".aÂ·2; @"net".pÂ·6[int(0xd)] = @"net".bÂ·3; @"net".pÂ·6[int(0xe)] = @"net".cÂ·4; @"net".pÂ·6[int(0xf)] = @"net".dÂ·5; return @"net".pÂ·6 }
+	var @"net".v4InV6Prefix []byte
+
+$$
+_go_.o          0           0     0     644     24971     `
+go object darwin amd64 go1.6.2 X:none
+
+!
+  go13ld
+fmt.a
+net.aos.a.github.com/c4pt0r/ini.a ş$"".(*NetModel).Run      eH‹%    HD$ÈH;A†«  Hì¸   H    H‰\$xHÇ„$€      H    H‰$HÇD$    HÇD$    HÇD$    è    H‹L$ 1ÀH‰„$˜   H‰„$    ˆ„$¨   H‰„$°   H„$˜   H‹l$xH‰(H‹¬$€   H‰h1í@ˆhH‰HH‰D$`H‰$H    H‰\$HÇD$   H    H‰\$HÇD$    1ÛH‰\$(H‰\$0è    H‹\$8H‰\$XH‹\$`H‰$H    H‰\$HÇD$   H    H‰\$HÇD$    1ÛH‰\$(H‰\$0è    H‹\$8H‰\$PH‹\$`H‰$è    HÇ$    H‹t$XH|$H‹H‰H‹NH‰OH    H‰\$HÇD$    H‹t$PH|$(H‹H‰H‹NH‰Oè    H‹L$8H‹D$@H    H‰$HÇD$   H‰L$hH‰L$H‰D$pH‰D$è    H‹\$ H‰\$HH‹L$(H‹D$0H‹œ$À   H‰$H‰Œ$ˆ   H‰L$H‰„$   H‰D$è    H    H‰$HÇD$   H‹\$HH‰\$è    H‹D$H‹\$ H‰œ$ˆ   H‹\$(H‰œ$   H‹œ$À   Hƒû tO€=     u6H‰H‹œ$À   H‰$H‹œ$ˆ   H‰\$H‹œ$   H‰\$è    HÄ¸   ÃH‰$H‰D$è    ë½‰ë­è    é3ıÿÿÌÌÌ,
+      D  (go.string."base.ini"   t  \type.map[string]*github.com/c4pt0r/ini.Section   ¼  runtime.makemap   ô  go.string."sys"     go.string."ip"   Ü  Ngithub.com/c4pt0r/ini.(*ConfSet).String     go.string."sys"   º   go.string."port"   ø  Ngithub.com/c4pt0r/ini.(*ConfSet).String   ¨  Lgithub.com/c4pt0r/ini.(*ConfSet).Parse   ö  go.string.":"   Ì  *runtime.concatstring3   î   go.string."udp4"   º  $net.ResolveUDPAddr   ¸  ."".(*NetModel).checkErr   Æ   go.string."udp4"   ş  net.ListenUDP   ä	 (runtime.writeBarrier   Æ
+  ."".(*NetModel).checkErr   ò
+  .runtime.writebarrierptr   ˆ  0runtime.morestack_noctxt   ğ  "".autotmp_0003 ?Dtype.github.com/c4pt0r/ini.ConfSet "".autotmp_0001  Ftype.*github.com/c4pt0r/ini.ConfSet <github.com/c4pt0r/ini.fnameÂ·2 type.string "".err _type.error "".udpAddr ß"type.*net.UDPAddr "".serverAddr Ÿtype.string "".serverPort Ïtype.*string "".serverIp ¿type.*string "".conf ¯Ftype.*github.com/c4pt0r/ini.ConfSet "".this  "type.*"".NetModel  ğïğï Ğ @ NN\A+\+ ( ]NRv#z TgclocalsÂ·a9ea41aae9e32efcc8711d8fabe405fb TgclocalsÂ·915b862b46ecd3da0a0929975a4228d7   p/Users/machao/project/cw_log_server/src/lognet/lognet.goş."".(*NetModel).checkErr  à  àeH‹%    H;a†Ó   HƒìhH‹L$xHƒù „    1ÛH‰\$@H‰\$HH\$@Hƒû „   HÇD$X   HÇD$`   H‰\$PH‰$H‹œ$€   H‰\$è    H‹L$H‹D$H‹\$PH‰L$0H‰H‰D$8€=     u8H‰CH‹\$PH‰$H‹\$XH‰\$H‹\$`H‰\$è    HÇ$   è    HƒÄhÃLCL‰$H‰D$è    ë¸‰é[ÿÿÿè    éÿÿÿ
+      Ô  runtime.convI2E   ˜ (runtime.writeBarrier   ê  fmt.Println   „  os.Exit   ²  .runtime.writebarrierptr   Î  0runtime.morestack_noctxt   0Ğ  
+"".autotmp_0009 o"type.interface {} "".autotmp_0008 O(type.[1]interface {} "".autotmp_0005 /&type.[]interface {} "".err type.error "".this  "type.*"".NetModel  Ğ³ÏĞÏ
+ ğ  @
+“
+  iK$ TgclocalsÂ·2027b6cfe4f64a74d7b688d238add74a TgclocalsÂ·5ef976c2593056b9243adf402ae9d952   p/Users/machao/project/cw_log_server/src/lognet/lognet.goş"".init  À  ÀeH‹%    H;avC¶    €û t¶    €ûuÃè    Æ    è    è    è    è    Æ    Ãè    ë§ÌÌÌÌÌÌÌ
+      $  "".initdoneÂ·   <  "".initdoneÂ·   R  "runtime.throwinit   b "".initdoneÂ·   n  fmt.init   x  net.init   ‚  os.init   Œ  4github.com/c4pt0r/ini.init   ˜ "".initdoneÂ·   ¦  0runtime.morestack_noctxt        ` ` J` 
+ (8 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   p/Users/machao/project/cw_log_server/src/lognet/lognet.goş(type..hash.[8]string     eH‹%    H;avpHƒì(H‹L$81ÀHÇD$   H‹l$H9è}DH‰D$ H‹\$0Hƒû t>H‰ÅHÁåHëH‰$H‰L$8H‰L$è    H‹L$H‹D$ HÿÀH‹l$H9è|¼H‰L$@HƒÄ(Ã‰ë¾è    éwÿÿÿÌÌÌÌÌÌÌ
+      ¬  runtime.strhash   €  0runtime.morestack_noctxt   0P  
+"".autotmp_0011 type.int "".autotmp_0010 type.int "".~r2  type.uintptr "".h type.uintptr "".p  type.*[8]string PgOPO   
+ U; TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   p/Users/machao/project/cw_log_server/src/lognet/lognet.goş$type..eq.[8]string à  àeH‹%    H;a†Î   HƒìX1ÀHÇD$(   H‹l$(H9è’   H‰D$0H‹\$`Hƒû „–   H‰ÅHÁåHëH‹3H‹KH‹\$hHƒû tvH‰ÅHÁåHëH‹H‹CH9ÁuVH‰t$HH‰4$H‰L$PH‰L$H‰T$8H‰T$H‰D$@H‰D$è    ¶\$ €û t H‹D$0HÿÀH‹l$(H9èŒnÿÿÿÆD$pHƒÄXÃÆD$p HƒÄXÃ‰ë†‰écÿÿÿè    éÿÿÿÌÌÌÌÌ
+      ¼   runtime.eqstring   Ä  0runtime.morestack_noctxt   0°  "".autotmp_0015 ?type.string "".autotmp_0014 type.string "".autotmp_0013 _type.int "".autotmp_0012 Otype.int "".~r2  type.bool "".q type.*[8]string "".p  type.*[8]string ,°´¯°	¯°¯ ğ ğ  S TgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a TgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440   p/Users/machao/project/cw_log_server/src/lognet/lognet.goş4type..hash.[1]interface {}     eH‹%    H;avpHƒì(H‹L$81ÀHÇD$   H‹l$H9è}DH‰D$ H‹\$0Hƒû t>H‰ÅHÁåHëH‰$H‰L$8H‰L$è    H‹L$H‹D$ HÿÀH‹l$H9è|¼H‰L$@HƒÄ(Ã‰ë¾è    éwÿÿÿÌÌÌÌÌÌÌ
+      ¬  (runtime.nilinterhash   €  0runtime.morestack_noctxt   0P  
+"".autotmp_0017 type.int "".autotmp_0016 type.int "".~r2  type.uintptr "".h type.uintptr "".p  *type.*[1]interface {} PgOPO   
+ U; TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   p/Users/machao/project/cw_log_server/src/lognet/lognet.goş0type..eq.[1]interface {} à  àeH‹%    H;a†Î   HƒìX1ÀHÇD$(   H‹l$(H9è’   H‰D$0H‹\$hHƒû „–   H‰ÅHÁåHëH‹H‹sH‹\$`Hƒû tvH‰ÅHÁåHëH‹H‹SH9ÈuVH‰D$8H‰$H‰T$@H‰T$H‰L$HH‰L$H‰t$PH‰t$è    ¶\$ €û t H‹D$0HÿÀH‹l$(H9èŒnÿÿÿÆD$pHƒÄXÃÆD$p HƒÄXÃ‰ë†‰écÿÿÿè    éÿÿÿÌÌÌÌÌ
+      ¼  runtime.efaceeq   Ä  0runtime.morestack_noctxt   0°  "".autotmp_0021 ?"type.interface {} "".autotmp_0020 "type.interface {} "".autotmp_0019 _type.int "".autotmp_0018 Otype.int "".~r2  type.bool "".q *type.*[1]interface {} "".p  *type.*[1]interface {} ,°´¯°	¯°¯ ğ ğ  S TgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a TgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440   p/Users/machao/project/cw_log_server/src/lognet/lognet.goş0go.string.hdr."base.ini"                       (go.string."base.ini"   ş(go.string."base.ini"    base.ini  ş&go.string.hdr."sys"                       go.string."sys"   şgo.string."sys"   sys  ş$go.string.hdr."ip"                       go.string."ip"   şgo.string."ip"   ip  ş(go.string.hdr."port"                        go.string."port"   ş go.string."port"   
+port  ş"go.string.hdr.":"                       go.string.":"   şgo.string.":"   :  ş(go.string.hdr."udp4"                        go.string."udp4"   ş go.string."udp4"   
+udp4  şTgclocalsÂ·915b862b46ecd3da0a0929975a4228d7 P  P          @   $  $  $   $  $   '   şTgclocalsÂ·a9ea41aae9e32efcc8711d8fabe405fb P  P                               şTgclocalsÂ·5ef976c2593056b9243adf402ae9d952 (  (                 şTgclocalsÂ·2027b6cfe4f64a74d7b688d238add74a (  (                şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           ş>"".initdoneÂ·  type.uint8   ş*"".(*NetModel).RunÂ·f              $"".(*NetModel).Run   ş4"".(*NetModel).checkErrÂ·f              ."".(*NetModel).checkErr   ş"".initÂ·f              "".init   ş"runtime.gcbits.01    ş.go.string.hdr."[]uint8"                       &go.string."[]uint8"   ş&go.string."[]uint8"   []uint8  ştype.[]uint8                 ß~.8                                                 
+0   runtime.algarray   @  "runtime.gcbits.01   P  .go.string.hdr."[]uint8"   p  *go.weak.type.*[]uint8   €  type.uint8   ş6go.typelink.[]uint8	[]uint8              type.[]uint8   şruntime.gcbits.      ş0go.string.hdr."[8]uint8"                       (go.string."[8]uint8"   ş(go.string."[8]uint8"    [8]uint8  ştype.[8]uint8 °  °               >ù0´ ‘                                                               0   runtime.algarray   @  runtime.gcbits.   P  0go.string.hdr."[8]uint8"   p  ,go.weak.type.*[8]uint8   €  type.uint8     type.[]uint8   ş:go.typelink.[8]uint8	[8]uint8              type.[8]uint8   ş0go.string.hdr."[]string"                       (go.string."[]string"   ş(go.string."[]string"    []string  ştype.[]string                 Ó¨ó
+                                                 
+0   runtime.algarray   @  "runtime.gcbits.01   P  0go.string.hdr."[]string"   p  ,go.weak.type.*[]string   €  type.string   ş:go.typelink.[]string	[]string              type.[]string   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440              şTgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a             ş0type..hashfunc.[8]string              (type..hash.[8]string   ş,type..eqfunc.[8]string              $type..eq.[8]string   ş&type..alg.[8]string                        0type..hashfunc.[8]string     ,type..eqfunc.[8]string   ş&runtime.gcbits.5555   UU ş2go.string.hdr."[8]string"             	          *go.string."[8]string"   ş*go.string."[8]string"    [8]string  ştype.[8]string °  °€       x       USŒ>                                                                0  &type..alg.[8]string   @  &runtime.gcbits.5555   P  2go.string.hdr."[8]string"   p  .go.weak.type.*[8]string   €  type.string     type.[]string   ş>go.typelink.[8]string	[8]string              type.[8]string   ş<go.string.hdr."[]*ini.Section"                       4go.string."[]*ini.Section"   ş4go.string."[]*ini.Section"    []*ini.Section  şJtype.[]*github.com/c4pt0r/ini.Section                 ta_                                                 
+0   runtime.algarray   @  "runtime.gcbits.01   P  <go.string.hdr."[]*ini.Section"   p  \go.weak.type.*[]*github.com/c4pt0r/ini.Section   €  Ftype.*github.com/c4pt0r/ini.Section   şvgo.typelink.[]*ini.Section	[]*github.com/c4pt0r/ini.Section              Jtype.[]*github.com/c4pt0r/ini.Section   ş type..hashfunc64             @          ,runtime.memhash_varlen   ştype..eqfunc64             @          .runtime.memequal_varlen   ştype..alg64                         type..hashfunc64     type..eqfunc64   ş"runtime.gcbits.ff   ÿ ş>go.string.hdr."[8]*ini.Section"                       6go.string."[8]*ini.Section"   ş6go.string."[8]*ini.Section"     [8]*ini.Section  şLtype.[8]*github.com/c4pt0r/ini.Section °  °@       @       á                                                                0  type..alg64   @  "runtime.gcbits.ff   P  >go.string.hdr."[8]*ini.Section"   p  ^go.weak.type.*[8]*github.com/c4pt0r/ini.Section   €  Ftype.*github.com/c4pt0r/ini.Section     Jtype.[]*github.com/c4pt0r/ini.Section   şzgo.typelink.[8]*ini.Section	[8]*github.com/c4pt0r/ini.Section              Ltype.[8]*github.com/c4pt0r/ini.Section   ş^go.string.hdr."*map.bucket[string]*ini.Section"                       Vgo.string."*map.bucket[string]*ini.Section"   şVgo.string."*map.bucket[string]*ini.Section" @  @*map.bucket[string]*ini.Section  şltype.*map.bucket[string]*github.com/c4pt0r/ini.Section                 ?Şíí 6                                                
+0   runtime.algarray   @  "runtime.gcbits.01   P  ^go.string.hdr."*map.bucket[string]*ini.Section"   p  ~go.weak.type.**map.bucket[string]*github.com/c4pt0r/ini.Section   €  jtype.map.bucket[string]*github.com/c4pt0r/ini.Section   ş.runtime.gcbits.aaaafe03   ªªş ş\go.string.hdr."map.bucket[string]*ini.Section"                       Tgo.string."map.bucket[string]*ini.Section"   şTgo.string."map.bucket[string]*ini.Section" @  >map.bucket[string]*ini.Section  ş.go.string.hdr."topbits"                       &go.string."topbits"   ş&go.string."topbits"   topbits  ş(go.string.hdr."keys"                        go.string."keys"   ş go.string."keys"   
+keys  ş,go.string.hdr."values"                       $go.string."values"   ş$go.string."values"   values  ş0go.string.hdr."overflow"                       (go.string."overflow"   ş(go.string."overflow"    overflow  şjtype.map.bucket[string]*github.com/c4pt0r/ini.Section ğ  ğĞ       Ğ       1Ú7ğ                                                                                                                                                                              ˆ                                       È       0à  runtime.algarray   @  .runtime.gcbits.aaaafe03   P  \go.string.hdr."map.bucket[string]*ini.Section"   p  |go.weak.type.*map.bucket[string]*github.com/c4pt0r/ini.Section   €° jtype.map.bucket[string]*github.com/c4pt0r/ini.Section   °  .go.string.hdr."topbits"   Ğ  type.[8]uint8   €  (go.string.hdr."keys"      type.[8]string   Ğ  ,go.string.hdr."values"   ğ  Ltype.[8]*github.com/c4pt0r/ini.Section      0go.string.hdr."overflow"   À  ltype.*map.bucket[string]*github.com/c4pt0r/ini.Section   ş"runtime.gcbits.2c   , şVgo.string.hdr."map.hdr[string]*ini.Section"                       Ngo.string."map.hdr[string]*ini.Section"   şNgo.string."map.hdr[string]*ini.Section" @  8map.hdr[string]*ini.Section  ş*go.string.hdr."count"                       "go.string."count"   ş"go.string."count"   count  ş*go.string.hdr."flags"                       "go.string."flags"   ş"go.string."flags"   flags  ş"go.string.hdr."B"                       go.string."B"   şgo.string."B"   B  ş*go.string.hdr."hash0"                       "go.string."hash0"   ş"go.string."hash0"   hash0  ş.go.string.hdr."buckets"                       &go.string."buckets"   ş&go.string."buckets"   buckets  ş4go.string.hdr."oldbuckets"             
+          ,go.string."oldbuckets"   ş,go.string."oldbuckets"    oldbuckets  ş2go.string.hdr."nevacuate"             	          *go.string."nevacuate"   ş*go.string."nevacuate"    nevacuate  şdtype.map.hdr[string]*github.com/c4pt0r/ini.Section °  °0       0       ¦{.                                                                                                                                                                              	                                                                                                                                                                                                    (       *0à  runtime.algarray   @  "runtime.gcbits.2c   P  Vgo.string.hdr."map.hdr[string]*ini.Section"   p  vgo.weak.type.*map.hdr[string]*github.com/c4pt0r/ini.Section   €° dtype.map.hdr[string]*github.com/c4pt0r/ini.Section   °  *go.string.hdr."count"   Ğ  type.int   €  *go.string.hdr."flags"      type.uint8   Ğ  "go.string.hdr."B"   ğ  type.uint8      *go.string.hdr."hash0"   À  type.uint32   ğ  .go.string.hdr."buckets"     ltype.*map.bucket[string]*github.com/c4pt0r/ini.Section   À  4go.string.hdr."oldbuckets"   à  ltype.*map.bucket[string]*github.com/c4pt0r/ini.Section     2go.string.hdr."nevacuate"   °  type.uintptr   à  0go.string.hdr."overflow"   €  &type.unsafe.Pointer   şNgo.string.hdr."map[string]*ini.Section"                       Fgo.string."map[string]*ini.Section"   şFgo.string."map[string]*ini.Section" 0  0map[string]*ini.Section  ş\type.map[string]*github.com/c4pt0r/ini.Section Ğ  Ğ              <ó™ 5                                                                          Ğ 0€  runtime.algarray   @  "runtime.gcbits.01   P  Ngo.string.hdr."map[string]*ini.Section"   p  ngo.weak.type.*map[string]*github.com/c4pt0r/ini.Section   €  type.string     Ftype.*github.com/c4pt0r/ini.Section      jtype.map.bucket[string]*github.com/c4pt0r/ini.Section   °  dtype.map.hdr[string]*github.com/c4pt0r/ini.Section   şšgo.typelink.map[string]*ini.Section	map[string]*github.com/c4pt0r/ini.Section              \type.map[string]*github.com/c4pt0r/ini.Section   ş>go.string.hdr."lognet.NetModel"                       6go.string."lognet.NetModel"   ş6go.string."lognet.NetModel"     lognet.NetModel  ş.go.string.hdr."UdpConn"                       &go.string."UdpConn"   ş&go.string."UdpConn"   UdpConn  ş0go.string.hdr."NetModel"                       (go.string."NetModel"   ş(go.string."NetModel"    NetModel  ş,go.string.hdr."lognet"                       $go.string."lognet"   ş$go.string."lognet"   lognet  ş"go.importpath."".                       $go.string."lognet"   ş type."".NetModel  Ğ  Ğ              gÈE 9                                                                                                                                              0   runtime.algarray   @  "runtime.gcbits.01   P  >go.string.hdr."lognet.NetModel"   p  "type.*"".NetModel   €°  type."".NetModel   °  .go.string.hdr."UdpConn"   Ğ  "type.*net.UDPConn   `€  type."".NetModel   €  0go.string.hdr."NetModel"     "go.importpath."".    Ğ  type."".NetModel   ş@go.string.hdr."*lognet.NetModel"                       8go.string."*lognet.NetModel"   ş8go.string."*lognet.NetModel" 0  "*lognet.NetModel  şLgo.string.hdr."func(*lognet.NetModel)"                       Dgo.string."func(*lognet.NetModel)"   şDgo.string."func(*lognet.NetModel)" 0  .func(*lognet.NetModel)  ş.type.func(*"".NetModel) €  €              ¦z 3                                                                                                      0€  runtime.algarray   @  "runtime.gcbits.01   P  Lgo.string.hdr."func(*lognet.NetModel)"   p  @go.weak.type.*func(*"".NetModel)   ğ .type.func(*"".NetModel)   À€ .type.func(*"".NetModel)   ğ  "type.*"".NetModel   şjgo.typelink.func(*lognet.NetModel)	func(*"".NetModel)              .type.func(*"".NetModel)   şZgo.string.hdr."func(*lognet.NetModel, error)"                       Rgo.string."func(*lognet.NetModel, error)"   şRgo.string."func(*lognet.NetModel, error)" @  <func(*lognet.NetModel, error)  ş<type.func(*"".NetModel, error)                 Ç£°; 3                                                                                                              0€  runtime.algarray   @  "runtime.gcbits.01   P  Zgo.string.hdr."func(*lognet.NetModel, error)"   p  Ngo.weak.type.*func(*"".NetModel, error)   ğ <type.func(*"".NetModel, error)   À <type.func(*"".NetModel, error)   ğ  "type.*"".NetModel   €  type.error   ş†go.typelink.func(*lognet.NetModel, error)	func(*"".NetModel, error)              <type.func(*"".NetModel, error)   ş&go.string.hdr."Run"                       go.string."Run"   şgo.string."Run"   Run  ş,go.string.hdr."func()"                       $go.string."func()"   ş$go.string."func()"   func()  ştype.func() ğ  ğ              ö¼‚ö 3                                                                                                0€  runtime.algarray   @  "runtime.gcbits.01   P  ,go.string.hdr."func()"   p  (go.weak.type.*func()   ğ type.func()   Àğ type.func()   ş2go.typelink.func()	func()              type.func()   ş0go.string.hdr."checkErr"                       (go.string."checkErr"   ş(go.string."checkErr"    checkErr  ş6go.string.hdr."func(error)"                       .go.string."func(error)"   ş.go.string."func(error)"    func(error)  ş type.func(error) €  €              ['g 3                                                                                                      0€  runtime.algarray   @  "runtime.gcbits.01   P  6go.string.hdr."func(error)"   p  2go.weak.type.*func(error)   ğ  type.func(error)   À€  type.func(error)   ğ  type.error   şFgo.typelink.func(error)	func(error)               type.func(error)   ş"type.*"".NetModel                    @¹Øå 6                                                                                                                                                                                      $0   runtime.algarray   @  "runtime.gcbits.01   P  @go.string.hdr."*lognet.NetModel"   p  4go.weak.type.**"".NetModel   €   type."".NetModel   ` "type.*"".NetModel   °à "type.*"".NetModel   à  &go.string.hdr."Run"   €  type.func()     .type.func(*"".NetModel)      $"".(*NetModel).Run   °  $"".(*NetModel).Run   À  0go.string.hdr."checkErr"   Ğ  "go.importpath."".   à   type.func(error)   ğ  <type.func(*"".NetModel, error)   €  ."".(*NetModel).checkErr     ."".(*NetModel).checkErr   ş"runtime.gcbits.03    ş8go.string.hdr."interface {}"                       0go.string."interface {}"   ş0go.string."interface {}"    interface {}  ş"type.interface {} °  °              çW                                                                  
+0€  runtime.algarray   @  "runtime.gcbits.03   P  8go.string.hdr."interface {}"   p  4go.weak.type.*interface {}   €° "type.interface {}   ş<go.string.hdr."[]interface {}"                       4go.string."[]interface {}"   ş4go.string."[]interface {}"    []interface {}  ş&type.[]interface {}                 p“ê/                                                 
+0   runtime.algarray   @  "runtime.gcbits.01   P  <go.string.hdr."[]interface {}"   p  8go.weak.type.*[]interface {}   €  "type.interface {}   şRgo.typelink.[]interface {}	[]interface {}              &type.[]interface {}   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440              şTgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a             ş<type..hashfunc.[1]interface {}              4type..hash.[1]interface {}   ş8type..eqfunc.[1]interface {}              0type..eq.[1]interface {}   ş2type..alg.[1]interface {}                        <type..hashfunc.[1]interface {}     8type..eqfunc.[1]interface {}   ş>go.string.hdr."[1]interface {}"                       6go.string."[1]interface {}"   ş6go.string."[1]interface {}"     [1]interface {}  ş(type.[1]interface {} °  °              P‘[ú                                                                0  2type..alg.[1]interface {}   @  "runtime.gcbits.03   P  >go.string.hdr."[1]interface {}"   p  :go.weak.type.*[1]interface {}   €  "type.interface {}     &type.[]interface {}   şVgo.typelink.[1]interface {}	[1]interface {}              (type.[1]interface {}   ş@go.string.hdr."*[1]interface {}"                       8go.string."*[1]interface {}"   ş8go.string."*[1]interface {}" 0  "*[1]interface {}  ş*type.*[1]interface {}                 ¿¨5 6                                                
+0   runtime.algarray   @  "runtime.gcbits.01   P  @go.string.hdr."*[1]interface {}"   p  <go.weak.type.**[1]interface {}   €  (type.[1]interface {}   ş4go.string.hdr."*[8]string"             
+          ,go.string."*[8]string"   ş,go.string."*[8]string"    *[8]string  ştype.*[8]string                 ­”o 6                                                
+0   runtime.algarray   @  "runtime.gcbits.01   P  4go.string.hdr."*[8]string"   p  0go.weak.type.**[8]string   €  type.[8]string   ş&go.string.hdr."fmt"                       go.string."fmt"   şgo.string."fmt"   fmt  ş$go.importpath.fmt.                       go.string."fmt"   ş$go.string.hdr."os"                       go.string."os"   şgo.string."os"   os  ş"go.importpath.os.                       go.string."os"   ş&go.string.hdr."net"                       go.string."net"   şgo.string."net"   net  ş$go.importpath.net.                       go.string."net"   şJgo.string.hdr."github.com/c4pt0r/ini"                       Bgo.string."github.com/c4pt0r/ini"   şBgo.string."github.com/c4pt0r/ini" 0  ,github.com/c4pt0r/ini  şHgo.importpath.github.com/c4pt0r/ini.                       Bgo.string."github.com/c4pt0r/ini"   ş.type..hash.[8]stringÂ·f              (type..hash.[8]string   ş*type..eq.[8]stringÂ·f              $type..eq.[8]string   ş:type..hash.[1]interface {}Â·f              4type..hash.[1]interface {}   ş6type..eq.[1]interface {}Â·f              0type..eq.[1]interface {}   ÿÿgo13ld 
