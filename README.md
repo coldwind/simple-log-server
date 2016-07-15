@@ -13,5 +13,7 @@
 - ip 服务器的ip地址
 - port 服务器开放的端口
 
-## 安装
+## 安装&使用
 go install cw_log_server
+./cw_log_server
+测试：nc -u 127.0.0.1 19851 (ip port以配置为准)
