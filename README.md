@@ -1,7 +1,7 @@
 # cw_log_server
-> cw_log_server是一个udp日志服务器
-> 默认存储日志在 bin/data/ 下
-> 服务器以小时为单位创建日志记录的文件夹，每个文件夹内最多25个.data文件
+> cw_log_server是一个udp日志服务器   
+> 默认存储日志在 bin/data/ 下   
+> 服务器以小时为单位创建日志记录的文件夹，每个文件夹内最多25个.data文件   
 
 ## DATA命名规则
 - 目录文件 年月日时 如：2016010101
@@ -14,6 +14,6 @@
 - port 服务器开放的端口
 
 ## 安装&使用
-go install cw_log_server
-./cw_log_server
+go install cw_log_server   
+./cw_log_server   
 测试：nc -u 127.0.0.1 19851 (ip port以配置为准)
